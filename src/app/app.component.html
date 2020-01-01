@@ -1,20 +1,30 @@
 <h1>{{title}}</h1>
-<div>
-<img [src]="imgurl" alt="image">
-</div>
+<h2>My favorite hero is: {{myHero}}</h2>
+<p>Heroes:</p>
+<ul>
+  <li *ngFor="let hero of heroes">
+    {{ hero }}
+  </li>
+</ul>
+<p *ngIf="heroes.length > 3">There are many heroes!</p>
 
 
-<div>
-    <button (click)="increamentCount()">click</button>
-    <p>clicked{{ count}}times</p>
-</div>
+<label>Type something:
+  <input #customerInput>{{customerInput.value}}
+</label>
 
-<div>
-<input type="text" [(ngModel)]="name">
-<p>welcome {{name}}</p>
-</div>
 
-<div>
-    <input type="text" [(ngModel)]="userName" (ngModelChange)="checkperson($event)">
-    <p>welcome {{userName}}</p>
-    </div>
+<button (click)="onSave($event)">Save</button>
+<button *ngFor="let hero of heroes" (click)="deleteHero(hero)">{{hero.name}}</button>
+<form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
+
+<!-- Bind button disabled state to `isUnchanged` property -->
+<button [disabled]="isUnchanged">Save</button>
+
+<button disabled>Test Button</button>
+
+<input [disabled]="condition ? true : false">
+<input [attr.disabled]="condition ? 'disabled' : null">
+
+<button [style.font-size.em]="isSpecial ? 3 : 1" >Big</button>
+<button [style.font-size.%]="!isSpecial ? 150 : 50" >Small</button>
